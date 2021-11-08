@@ -5,7 +5,8 @@ extension DateString on String {
   DateTime? toDateTime(String pattern) {
     try {
       return DateFormat(pattern).parse(this);
-    } on Exception catch (_) {
+    } on Exception catch (e) {
+      print(e);
       return null;
     }
   }
@@ -13,7 +14,8 @@ extension DateString on String {
   String? toNewFormat(String fromPattern, String toPattern) {
     try {
       return DateFormat(toPattern).format(DateFormat(fromPattern).parse(this));
-    } on Exception catch (_) {
+    } on Exception catch (e) {
+      print(e);
       return null;
     }
   }
