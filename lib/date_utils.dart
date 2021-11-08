@@ -1,7 +1,11 @@
 import 'package:intl/intl.dart';
 
-extension DateString on String {
-  /// Parse string to [DateTime]
+class DatePattern {
+  static const String DMY = 'dd/MM/yyyy';
+  static const String DMY_HMS = 'dd/MM/yyyy HH:mm:ss';
+}
+
+extension DateString on dynamic {
   DateTime? toDateTime(String pattern) {
     try {
       return DateFormat(pattern).parse(this);
@@ -14,6 +18,15 @@ extension DateString on String {
   String? toNewFormat(String fromPattern, String toPattern) {
     try {
       return DateFormat(toPattern).format(DateFormat(fromPattern).parse(this));
+    } on Exception catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  String? toFormat(String toPattern) {
+    try {
+      return DateFormat(toPattern).format(this);
     } on Exception catch (e) {
       print(e);
       return null;
@@ -89,6 +102,40 @@ extension DateExtensions on DateTime {
 
   static bool isSameTime(DateTime a, DateTime b) =>
       a.hour == b.hour && a.minute == b.minute;
+
+  int compareDateTo(DateTime other) {
+    if (this.year > other.year)
+      return 1;
+    else if (this.year == other.year) if (this.month > other.month)
+      return 1;
+    else if (this.month == other.month) if (this.day > other.day)
+      return 1;
+    else if (this.day == other.day)
+      return 0;
+    else
+      return -1;
+    else
+      return -1;
+    else
+      return -1;
+  }
+
+  int compareTimeTo(DateTime other) {
+    if (this.hour > other.hour)
+      return 1;
+    else if (this.hour == other.hour) if (this.minute > other.minute)
+      return 1;
+    else if (this.minute == other.minute) if (this.second > other.second)
+      return 1;
+    else if (this.second == other.second)
+      return 0;
+    else
+      return -1;
+    else
+      return -1;
+    else
+      return -1;
+  }
 
   DateTime get firstDayOfMonth => DateTime(this.year, this.month);
 
