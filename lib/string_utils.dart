@@ -1,7 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
-
 extension StringUtils on String? {
   /// Lấy giá trị đầu tiên của chuỗi
   String getFirstChart() {
@@ -78,17 +74,6 @@ extension StringUtils on String? {
 
   /// Kiểm tra string tất cả là chữ hoa
   bool hasCapitalletter() => hasMatch(this, r'[A-Z]');
-
-  Size get getTextSize {
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: this),
-      maxLines: 1,
-    )..layout(
-        minWidth: 0,
-        maxWidth: double.infinity,
-      );
-    return textPainter.size;
-  }
 
   bool hasMatch(String? value, String pattern) {
     return (value == null) ? false : RegExp(pattern).hasMatch(value);
