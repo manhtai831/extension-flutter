@@ -128,4 +128,27 @@ extension StringUtils on String? {
   /// Returns a String without white space at all
   String? removeAllWhiteSpace() =>
       this.isEmptyOrNull ? null : this!.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+
+  static StringBuffer? _stringBuffer;
+  static String? _mPattern;
+
+  void append(String data, String pattern) {
+    _mPattern = pattern;
+    if (_stringBuffer == null) _stringBuffer = StringBuffer();
+    _stringBuffer!.write('$data$pattern');
+  }
+
+  String build() {
+    return _stringBuffer
+        .toString()
+        .substring(0, _stringBuffer.toString().length - _mPattern!.length);
+  }
+
+  String remove(List<String> pattern) {
+    String? s = this;
+    for (int i = 0; i < pattern.length; i++) {
+      s = s.isEmptyOrNull ? '' : s!.replaceAll(pattern[i], "");
+    }
+    return s ?? '';
+  }
 }
