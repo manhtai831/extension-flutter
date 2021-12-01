@@ -129,6 +129,10 @@ extension StringUtils on String? {
   String? removeAllWhiteSpace() =>
       this.isEmptyOrNull ? null : this!.replaceAll(RegExp(r"\s+\b|\b\s"), "");
 
+  String getChartAt(int at, String pattern) {
+    return this.isEmptyOrNull ? '' : this!.split(pattern)[at];
+  }
+
   static StringBuffer? _stringBuffer;
   static String? _mPattern;
 
